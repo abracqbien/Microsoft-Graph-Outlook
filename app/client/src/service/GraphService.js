@@ -31,3 +31,11 @@ export async function getEvents(accessToken) {
 
   return events;
 }
+
+export async function createEvents(accessToken) {
+  const client = getAuthenticatedClient(accessToken);
+
+  const event = await client.api('me/calendars/{id}/events').post();
+
+  return event;
+}

@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { Table } from 'reactstrap';
+import { Button } from 'reactstrap';
 import moment from 'moment';
 
 // Config
 import config from '../../config/Config';
 
 // Service
-import { getEvents } from '../../service/GraphService';
+import { getEvents, createEvents } from '../../service/GraphService';
 
 function formatDateTime(dateTime) {
   return moment
@@ -20,7 +21,8 @@ export default class Calendar extends Component {
     super(props);
 
     this.state = {
-      events: []
+      events: [],
+      event: []
     };
   }
 
@@ -42,7 +44,10 @@ export default class Calendar extends Component {
   render() {
     return (
       <div>
-        <h1>Calendar</h1>
+        <div style={{ marginBottom: '1rem' }}>
+          <h1>Calendar</h1>
+          <Button color='primary'>Create event</Button>
+        </div>
         <Table>
           <thead>
             <tr>
