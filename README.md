@@ -1,4 +1,4 @@
-# Microsoft-Graph-outlook
+# Microsoft Graph | Outlook Calendar
 
 This is React app for Microsoft Graph | Outlook calendar
 React V16.8+, 
