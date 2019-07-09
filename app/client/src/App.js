@@ -10,6 +10,7 @@ import NavBar from './components/layout/Navbar';
 import Welcome from './components/pages/Home';
 import About from './components/pages/About';
 import ErrorMessage from './components/pages/ErrorMessage';
+import Calendar from './components/calendar/Calendar';
 
 // CSS
 import 'bootstrap/dist/css/bootstrap.css';
@@ -81,7 +82,30 @@ class App extends Component {
                 />
               )}
             />
-            <Route exact path='/about' Component={About} />
+            <Route
+              exact
+              path='/about'
+              render={props => (
+                <About
+                  {...props}
+                  isAuthenticated={this.state.isAuthenticated}
+                  user={this.state.user}
+                  authButtonMethod={this.login.bind(this)}
+                />
+              )}
+            />
+            <Route
+              exact
+              path='/calendar'
+              render={props => (
+                <Calendar
+                  {...props}
+                  isAuthenticated={this.state.isAuthenticated}
+                  user={this.state.user}
+                  authButtonMethod={this.login.bind(this)}
+                />
+              )}
+            />
           </Container>
         </div>
       </Router>
