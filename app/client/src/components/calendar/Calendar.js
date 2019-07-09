@@ -12,7 +12,7 @@ function formatDateTime(dateTime) {
   return moment
     .utc(dateTime)
     .local()
-    .format('M/D/YY h:mm A');
+    .format('D/M/YY h:mm A');
 }
 
 export default class Calendar extends Component {
@@ -27,7 +27,7 @@ export default class Calendar extends Component {
   async componentDidMount() {
     try {
       // Get the user's access token
-      var accessToken = await window.msal.acuireTokenSilent({
+      var accessToken = await window.msal.acquireTokenSilent({
         scopes: config.scopes
       });
       // Get the user's events
@@ -56,7 +56,7 @@ export default class Calendar extends Component {
             {this.state.events.map(function(event) {
               return (
                 <tr key={event.id}>
-                  <td>{event.organize.emailAdress.name}</td>
+                  <td>{event.organizer.emailAddress.name}</td>
                   <td>{event.subject}</td>
                   <td>{formatDateTime(event.start.dateTime)}</td>
                   <td>{formatDateTime(event.end.dateTime)}</td>
