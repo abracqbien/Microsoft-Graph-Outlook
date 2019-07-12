@@ -36,6 +36,6 @@ export async function createEvents(accessToken, event) {
   const client = getAuthenticatedClient(accessToken);
 
   let res = await client.api('/me/events').post(event);
-  console.log(event);
+  console.log('Created RDV...');
   return res;
 }

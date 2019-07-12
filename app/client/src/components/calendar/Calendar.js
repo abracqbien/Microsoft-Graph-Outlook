@@ -47,7 +47,6 @@ export default class Calendar extends Component {
       var accessToken = await window.msal.acquireTokenSilent({
         scopes: config.scopes
       });
-      console.log('test 2');
 
       const event = {
         subject: 'Plan summer company picnic',
@@ -68,13 +67,6 @@ export default class Calendar extends Component {
             emailAddress: {
               address: 'rgrandin@pocketresult.com',
               name: 'Raphael Grandin'
-            },
-            type: 'Required'
-          },
-          {
-            emailAddress: {
-              address: 'AlexW@contoso.onmicrosoft.com',
-              name: 'Alex Wilber'
             },
             type: 'Required'
           }
@@ -108,9 +100,8 @@ export default class Calendar extends Component {
       };
 
       this.setState({ event: event });
-      console.log(this.state.event);
+      console.log('My POST event', this.state.event);
       await createEvents(accessToken, event);
-      console.log(this.state.event);
     } catch (err) {
       // this.props.showError('ERROR', JSON.stringify(err));
     }
