@@ -32,10 +32,10 @@ export async function getEvents(accessToken) {
   return events;
 }
 
-export async function createEvents(accessToken) {
+export async function createEvents(accessToken, event) {
   const client = getAuthenticatedClient(accessToken);
 
-  const event = await client.api('me/calendars/{id}/events').post();
-
-  return event;
+  let res = await client.api('/me/events').post(event);
+  console.log(event);
+  return res;
 }

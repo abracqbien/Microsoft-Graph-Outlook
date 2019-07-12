@@ -22,7 +22,7 @@ export default class Calendar extends Component {
 
     this.state = {
       events: [],
-      event: []
+      event: {}
     };
   }
 
@@ -41,12 +41,89 @@ export default class Calendar extends Component {
     }
   }
 
+  onClick = async () => {
+    console.log('test');
+    try {
+      var accessToken = await window.msal.acquireTokenSilent({
+        scopes: config.scopes
+      });
+      console.log('test 2');
+
+      const event = {
+        subject: 'Plan summer company picnic',
+        body: {
+          contentType: 'HTML',
+          content: "Let's kick-start this event planning!"
+        },
+        start: {
+          dateTime: '2019-08-01T13:00:00',
+          timeZone: 'Pacific Standard Time'
+        },
+        end: {
+          dateTime: '2019-08-01T14:00:00',
+          timeZone: 'Pacific Standard Time'
+        },
+        attendees: [
+          {
+            emailAddress: {
+              address: 'rgrandin@pocketresult.com',
+              name: 'Raphael Grandin'
+            },
+            type: 'Required'
+          },
+          {
+            emailAddress: {
+              address: 'AlexW@contoso.onmicrosoft.com',
+              name: 'Alex Wilber'
+            },
+            type: 'Required'
+          }
+        ],
+        location: {
+          displayName: 'Conf Room 3; Fourth Coffee; Home Office',
+          locationType: 'Default'
+        },
+        locations: [
+          {
+            displayName: 'Conf Room 3'
+          },
+          {
+            displayName: 'Fourth Coffee',
+            address: {
+              street: '4567 Main St',
+              city: 'Redmond',
+              state: 'WA',
+              countryOrRegion: 'US',
+              postalCode: '32008'
+            },
+            coordinates: {
+              latitude: 47.672,
+              longitude: -102.103
+            }
+          },
+          {
+            displayName: 'Home Office'
+          }
+        ]
+      };
+
+      this.setState({ event: event });
+      console.log(this.state.event);
+      await createEvents(accessToken, event);
+      console.log(this.state.event);
+    } catch (err) {
+      // this.props.showError('ERROR', JSON.stringify(err));
+    }
+  };
+
   render() {
     return (
       <div>
         <div style={{ marginBottom: '1rem' }}>
           <h1>Calendar</h1>
-          <Button color='primary'>Create event</Button>
+          <Button color='primary' onClick={this.onClick}>
+            Create event
+          </Button>
         </div>
         <Table>
           <thead>
