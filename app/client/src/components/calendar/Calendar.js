@@ -42,7 +42,6 @@ export default class Calendar extends Component {
   }
 
   onClick = async () => {
-    console.log('test');
     try {
       var accessToken = await window.msal.acquireTokenSilent({
         scopes: config.scopes
